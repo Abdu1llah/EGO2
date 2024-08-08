@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGO2 - متجرك الرقمي المتكامل</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #e72c3c;
+            --secondary-color: #001737;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f1f1f1;
+            --success-color: #2ecc71;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Tajawal', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+        }
+        
+        header {
+            background: var(--secondary-color);
+            color: #ffffff;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        header .logo {
+            float: right;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        header .logo span {
+            color: var(--primary-color);
+        }
+        
+        nav {
+            float: left;
+        }
+        
+        nav ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        nav li {
+            display: inline;
+            margin-left: 20px;
+        }
+        
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        #showcase {
+            background: var(--secondary-color);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            padding-top: 60px;
+        }
+        
+        #showcase h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        #showcase p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.5s;
+            animation-fill-mode: both;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: #ffffff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 1s;
+            animation-fill-mode: both;
+        }
+        
+        .btn:hover {
+            background: #c72b37;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        #featured-products {
+            padding: 80px 0;
+            background: #ffffff;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: var(--secondary-color);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 25px;
+        }
+        
+        .product-title {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .product-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .product-button:hover {
+            background-color: #c72b37;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .product-button.whatsapp-link {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .product-button.whatsapp-link:hover {
+            background-color: #c72b37;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        #benefits {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            padding: 80px 0;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .benefit-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .benefit-icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .benefit-item h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .benefit-item p {
+            color: #ffffff;
+        }
+        
+        #testimonials {
+            padding: 80px 0;
+            background: #f9f9f9;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-item {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        #newsletter {
+            background: var(--primary-color);
+            color: #ffffff;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .newsletter-form input[type="email"] {
+            padding: 12px;
+            width: 300px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .newsletter-form button {
+            padding: 12px 24px;
+            background: var(--secondary-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background: #34495e;
+        }
+        
+        footer {
+            background: var(--secondary-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-icons a {
+            color: #ffffff;
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header .logo, nav {
+                float: none;
+                text-align: center;
+            }
+            nav {
+                margin-top: 15px;
+            }
+            nav li {
+                display: block;
+                margin: 10px 0;
+            }
+            .benefits-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter-form input[type="email"], .newsletter-form button {
+                width: 100%;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+        }
+        #contact {
+    padding: 80px 0;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+#contact .container {
+    max-width: 600px;
+    margin: auto;
+}
+
+#contact .section-title {
+    font-size: 2.5em;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+#contact .contact-info {
+    font-size: 1.2em;
+    color: var(--text-color);
+    margin: 20px 0;
+}
+
+#contact .contact-info p {
+    margin: 10px 0;
+}
+
+#contact .contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+#contact .contact-info a:hover {
+    text-decoration: underline;
+}
+
+#contact .contact-info i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+#testimonials {
+    padding: 80px 0;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+#testimonials .container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+#testimonials .section-title {
+    font-size: 2.5em;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+    position: relative;
+}
+
+#testimonials .section-title::after {
+    content: '';
+    width: 80px;
+    height: 3px;
+    background: var(--primary-color);
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.testimonial-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.testimonial-item {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    flex: 1 1 300px;
+    max-width: 300px;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-10px);
+}
+
+.testimonial-item::before {
+    content: '“';
+    font-size: 3em;
+    color: var(--primary-color);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.testimonial-content {
+    text-align: center;
+}
+
+.testimonial-text {
+    font-style: italic;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.testimonial-author {
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+    .testimonial-grid {
+        flex-direction: column;
+    }
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+#navbar {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    #navbar {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    #navbar.active {
+        display: flex;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav li {
+        display: block;
+        margin: 10px 0;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">EGO<span>2</span></div>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="navbar">
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#featured-products">المنتجات</a></li>
+                    <li><a href="#benefits">مميزاتنا</a></li>
+                    <li><a href="#testimonials">آراء العملاء</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+
+    <section id="showcase">
+        <div class="container">
+            <h1>   متجر EGO2 </h1>
+            <p>بنوفرلك حسابات خاصه و مشتركة و سيريالات البرامج و المواقع</p>
+            <a href="#featured-products" class="btn">تسوق الآن</a>
+        </div>
+    </section>
+
+    <section id="featured-products">
+        <div class="container">
+            <h2 class="section-title">منتجاتنا المميزة</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="437116343_428352413221668_1062425385004274050_n.jpg" alt=" InVideo Pro">
+                    <div class="product-info">
+                        <h3 class="product-title">  InVideo Pro : عايز تسحر الناس بفيديوهاتك؟ InVideo Pro هو مفتاح الإبداع اللي كنت مستنيه!  </h3>
+                        <p class="product-price">99 جنية</p>
+                        <a href="https://wa.me/201015340944?text=أود%20الاشتراك%20في%20 InVideo Pro" class="product-button whatsapp-link">اشتري الآن</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="436403044_428348403222069_3486960556279470970_n.jpg" alt="كورسيرا بلس ">
+                    <div class="product-info">
+                        <h3 class="product-title">  اشترك في موقع كورسيرا بلس اقوي منصة للكورسات في العالم. </h3>
+                        <p class="product-price">300 جنية</p>
+                        <a href="https://wa.me/201015340944?text=أود%20الاشتراك%20في%20موقع%20كورسيرا بلس" class="product-button whatsapp-link">اشتري الآن</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="438102456_434481325942110_85922364315428402_n.jpg" alt="Chatgpt4o">
+                    <div class="product-info">
+                        <h3 class="product-title">اشترك في نموذج Chatgpt4o اقوي ذكاء اصطناعي في العالم <h3>
+                        <p class="product-price">150 جنيه</p>
+                        <a href="https://wa.me/201015340944?text=أود%20شراء%20نموذج%20Chatgpt4o" class="product-button whatsapp-link">اشتري الآن</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits">
+        <div class="container">
+            <h2 class="section-title" style="color: #ffffff;">لماذا EGO2؟</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="fas fa-bolt benefit-icon"></i>
+                    <h3>تنزيل فوري</h3>
+                    <p>احصل على منتجاتك الرقمية فور إتمام عملية الشراء</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-lock benefit-icon"></i>
+                    <h3>دفع آمن</h3>
+                    <p>استمتع بتجربة تسوق آمنة مع أحدث تقنيات الحماية</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-headset benefit-icon"></i>
+                    <h3>دعم 24/7</h3>
+                    <p>فريق دعم متخصص جاهز لمساعدتك على مدار الساعة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title">ماذا يقول عملاؤنا</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">"منتجات EGO2 غيرت مسار عملي بشكل كامل. الجودة لا تصدق!"</p>
+                        <p class="testimonial-author">- أحمد محمد</p>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">"أفضل استثمار قمت به لتطوير مهاراتي الرقمية."</p>
+                        <p class="testimonial-author">- سارة أحمد</p>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">"الدعم الفني ممتاز، والمنتجات تفوق التوقعات."</p>
+                        <p class="testimonial-author">- محمد علي</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">اتصل بنا</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> البريد الإلكتروني: <a href="mailto:info@ego2.com">info@ego2.com</a></p>
+                <p><i class="fas fa-phone"></i> رقم الهاتف: <a href="tel:01015340944">01015340944</a></p>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">عن EGO2</a>
+                    <a href="#">سياسة الخصوصية</a>
+                    <a href="#">الشروط والأحكام</a>
+                    <a href="#contact">اتصل بنا</a>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/EGO2technology/"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+            <p>&copy; 2024 EGO2 جميع الحقوق محفوظة </p>
+            <a href="https://wa.me/201552718749" class="product-button whatsapp-link">&copy; 2024 Abdullah Atef جميع الحقوق محفوظة </a>
+
+        </div>
+    </footer>
+
+    <script>
+        // يمكن إضافة سكريبت JavaScript هنا لتعزيز وظائف الموقع
+        document.addEventListener('DOMContentLoaded', function() {
+            // مثال: إظهار رسالة ترحيب
+            console.log('مرحبًا بك في EGO2!');
+            
+            // يمكن إضافة المزيد من الوظائف هنا، مثل:
+            // - التحقق من صحة نموذج النشرة الإخبارية
+            // - إضافة سلوك تفاعلي لأيقونة عربة التسوق
+            // - تنفيذ وظيفة البحث
+        });
+    </script>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var navbar = document.getElementById('navbar');
+            navbar.classList.toggle('active');
+        });
+    </script>
+    
+</body>
+</html>
